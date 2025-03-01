@@ -4,7 +4,6 @@ A real-time chat application built with **Spring Boot**, **Java**, and **MySQL**
 
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.0-green.svg)
 ![MySQL](https://img.shields.io/badge/MySQL-8.0-blue.svg)
-![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 ---
 
