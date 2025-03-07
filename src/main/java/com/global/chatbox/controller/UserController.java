@@ -17,7 +17,7 @@ import com.global.chatbox.service.UserService;
 
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -35,7 +35,7 @@ public class UserController {
       
     }
 
-    @PutMapping("update-User")
+    @PutMapping("update-user")
     public ResponseEntity<ApiResponse> updateUser(@RequestBody UserDto userDto) {
         try {
             UserDto userdto =userService.update(userDto);        

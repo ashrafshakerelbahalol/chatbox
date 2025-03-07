@@ -32,15 +32,22 @@ public class UserService {
     }
 
     public UserDto update(UserDto userDto) {
-        User user = userMapper.toEntity(userDto);
-        Optional<User> existingUser = userRepository.findById(user.getId());
-                
-        if (existingUser.isEmpty()) {
+        User updatedUser = userMapper.toEntity(userDto);
+        Optional<User> userWithTheSameId = userRepository.findById(updatedUser.getId());
+
+        if (userWithTheSameId.isEmpty()) {
             throw new ResourceNotFoundException("The user is not found");
         }
-
-        User savedUser = userRepository.save(user);
+    
+        User currentUser =userWithTheSameId.get();
+        currentUser.setEmail(updatedUser.getEmail());
+        currentUser.setLogin(updatedUser.getLogin());
+        User savedUser = userRepository.save(currentUser);
         return userMapper.toDto(savedUser);
+    }
+
+    public Optional<User> findUserById(Long userId) {
+        return userRepository.findById(userId);
     }
 
 }

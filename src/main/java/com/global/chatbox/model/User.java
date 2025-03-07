@@ -29,14 +29,14 @@ public class User {
     @Column(name = "user_id")
     @GeneratedValue(strategy  = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "user_login")
+    @Column(name = "user_login",unique=true)
     private String login;
     @Column(name = "user_password")
     private String password;
     @Column(name = "user_email", unique = true)
     private String email;
+    
     @ManyToMany(mappedBy = "users") 
     private Set<Chat> chats = new HashSet<>();
-    @OneToMany(mappedBy = "user") 
-    private Set<Message> messages = new HashSet<>();
+
 }
