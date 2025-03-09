@@ -1,6 +1,7 @@
 package com.global.chatbox.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Component;
@@ -40,6 +41,12 @@ public class MessageService {
         messageToBeSaved.setDatetime(LocalDateTime.now());
         messageToBeSaved =messageRepository.save(messageToBeSaved);
         return messageMapper.toDto(messageToBeSaved);
+    }
+
+    public List<MessageDto> getMessageById(Long chatId) {
+       List<Message> chatMessages =messageRepository.findByChatIdDesc(chatId);
+        return    chatMessages.stream().map(message-> messageMapper.toDto(message)).toList();
+        
     }
 
 }
