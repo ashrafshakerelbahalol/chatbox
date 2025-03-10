@@ -7,6 +7,7 @@ import com.global.chatbox.model.Chat;
 import com.global.chatbox.model.Message;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserDto {
     private Long id;
     private String login;

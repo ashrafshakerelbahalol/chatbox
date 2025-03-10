@@ -14,10 +14,11 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@Builder
 @Entity
 @Setter
 @Getter
@@ -36,7 +37,7 @@ public class Chat {
     @ManyToOne
     @JoinColumn(name="user_chat_user_id")
     private User userOwner;
-
+    @Builder.Default 
     @ManyToMany
     @JoinTable(name="user_chat",
     joinColumns={@JoinColumn(name="user_chat_chat_id")},

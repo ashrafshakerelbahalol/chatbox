@@ -13,16 +13,28 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@Builder
 @Entity
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Message {
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", datetime=" + datetime +
+                ", text='" + text + '\'' +
+                ", chat=" + chat +
+                ", user=" + user +
+                '}';
+    }
 
     @Id
     @Column(name = "message_id")

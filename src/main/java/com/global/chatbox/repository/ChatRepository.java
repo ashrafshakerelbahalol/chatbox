@@ -9,6 +9,5 @@ import com.global.chatbox.model.Chat;
 @Repository
 public interface ChatRepository extends JpaRepository<Chat,Long> {
 
-   Optional <Chat> findByTopic(String topic);
     
 }

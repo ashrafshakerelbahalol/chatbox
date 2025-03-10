@@ -14,16 +14,17 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Setter
 @Getter
-@Table
+@Table(name="users")
 public class User {
     @Id
     @Column(name = "user_id")
