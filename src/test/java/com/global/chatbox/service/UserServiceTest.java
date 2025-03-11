@@ -32,7 +32,7 @@ public class UserServiceTest {
     AddingUserRequest userRequest;
 
     @BeforeEach
-    void init() {
+    void Init() {
         user = User.builder().email("ashrafShaker@gmail.com").id(1L)
                 .login("ashraf").password("1234").build();
 
@@ -44,7 +44,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void userService_save_returnUserDto() {
+    public void UserService_Save_ReturnUserDto() {
         when(userRepository.findByEmail("ashrafShaker@gmail.com")).thenReturn(Optional.empty());
         when(userMapper.toEntity(userRequest)).thenReturn(user);
         when(userRepository.save(user)).thenReturn(user);
@@ -54,7 +54,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void userService_update(){
+    public void userService_Update(){
         when(userRepository.findById(userDto.getId())).thenReturn(Optional.of(user));
         when(userMapper.toEntity(userDto)).thenReturn(user);
         when(userRepository.save(user)).thenReturn(user);
@@ -63,7 +63,7 @@ public class UserServiceTest {
         Assertions.assertThat(updateUserDto).isNotNull();
     }
     @Test
-    public void userService_findUserById(){
+    public void UserService_FindUserById(){
         when(userRepository.findById(1L)).thenReturn(Optional.of(user));
         Optional<User> UserWithTheId= userService.findUserById(1L);
         Assertions.assertThat(UserWithTheId).isNotNull();

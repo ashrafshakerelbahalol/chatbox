@@ -25,16 +25,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Message {
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", datetime=" + datetime +
-                ", text='" + text + '\'' +
-                ", chat=" + chat +
-                ", user=" + user +
-                '}';
-    }
 
     @Id
     @Column(name = "message_id")
@@ -52,4 +42,14 @@ public class Message {
     @JoinColumn(name = "message_user_id")
     private User user;
 
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", datetime=" + datetime +
+                ", text='" + text + '\'' +
+                ", chat=" + chat +
+                ", user=" + user +
+                '}';
+    }
 }
