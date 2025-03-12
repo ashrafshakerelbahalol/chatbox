@@ -22,7 +22,7 @@ public class ChatDto {
 
     private String topic;
 
-    private String chatOwner;
+    private Long chatOwner;
   
     private Set <UserDtoToChat> users= new HashSet<>();
 }

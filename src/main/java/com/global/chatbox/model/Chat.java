@@ -35,7 +35,7 @@ public class Chat {
     @Column(name="chat_password")
     private String password;
     @ManyToOne
-    @JoinColumn(name="user_chat_user_id")
+    @JoinColumn(name="chat_owner_user_id")
     private User userOwner;
     @Builder.Default 
     @ManyToMany

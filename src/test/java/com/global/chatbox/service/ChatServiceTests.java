@@ -40,10 +40,10 @@ User user;
 public void init(){
      chat= Chat.builder().id(2L)
         .topic("chatvv").password("1234").build();
-     chatRequest= AddingChatRequest.builder().userOwner("hello")
+     chatRequest= AddingChatRequest.builder().ownerId(1L)
        .topic("chatvv").password("1234").build();
      chatDto=ChatDto.builder()
-     .chatOwner("hello")
+     .chatOwner(1L)
      .id(2L).topic("chatvv").build();
      user=User.builder().email("ashrafshaker@gmail.com")
        .id(1l).login("ashraf").password("hello").build(); 

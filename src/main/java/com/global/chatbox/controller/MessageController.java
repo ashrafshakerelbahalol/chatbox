@@ -47,7 +47,7 @@ public class MessageController {
     public ResponseEntity<?> getMessagesByChatId(@PathVariable long chatId) {
         try {
             List<MessageDto> messageDtos = messageService.getMessageById( chatId);
-            return ResponseEntity.ok(new ApiResponse("The message is added", messageDtos));
+            return ResponseEntity.ok(new ApiResponse("The messages is fetched ", messageDtos));
         
         } catch (RuntimeException e) {
             return ResponseEntity.status(500).body(new ApiResponse(e.getMessage(), null));

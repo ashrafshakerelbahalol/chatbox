@@ -15,7 +15,7 @@ import com.global.chatbox.model.User;
 
 @Mapper(componentModel = "spring", uses = UserMapper.class)
 public interface ChatMapper {
-    @Mapping(target="userOwner.login",source="chatRequest.userOwner")
+    @Mapping(target="userOwner.id",source="chatRequest.ownerId")
     Chat toEntity(AddingChatRequest chatRequest);
 
     @Mapping(target = "users", source = "users")

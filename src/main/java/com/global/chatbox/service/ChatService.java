@@ -14,9 +14,11 @@ import com.global.chatbox.model.Chat;
 import com.global.chatbox.model.User;
 import com.global.chatbox.repository.ChatRepository;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ChatService {
     private final ChatRepository chatRepository;
@@ -24,6 +26,9 @@ public class ChatService {
     private final ChatMapper chatMapper;
 
     public ChatDto createChat(AddingChatRequest chatRequest) {
+         User owner = userService.findUserById(chatRequest.getOwnerId())
+        .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+
         Chat chatToBeSaved = chatMapper.toEntity(chatRequest);
         return chatMapper.toDto(chatRepository.save(chatToBeSaved));
 

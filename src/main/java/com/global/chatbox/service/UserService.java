@@ -3,6 +3,7 @@ package com.global.chatbox.service;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.global.chatbox.error.ResourceFoundException;
@@ -27,6 +28,8 @@ public class UserService {
         if (userWithTheSameEmail.isPresent()) {
             throw new ResourceFoundException("The email is saved before");
         }
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+        user.setPassword(encoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
         return userMapper.toDto(savedUser);
     }
@@ -38,8 +41,8 @@ public class UserService {
         if (userWithTheSameId.isEmpty()) {
             throw new ResourceNotFoundException("The user is not found");
         }
-    
-        User currentUser =userWithTheSameId.get();
+
+        User currentUser = userWithTheSameId.get();
         currentUser.setEmail(updatedUser.getEmail());
         currentUser.setLogin(updatedUser.getLogin());
         User savedUser = userRepository.save(currentUser);
@@ -49,5 +52,7 @@ public class UserService {
     public Optional<User> findUserById(Long userId) {
         return userRepository.findById(userId);
     }
+
+ 
 
 }

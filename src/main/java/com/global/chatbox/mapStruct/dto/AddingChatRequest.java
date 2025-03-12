@@ -23,6 +23,6 @@ import lombok.Setter;
 public class AddingChatRequest {
     private String topic;
     private String password;
-    private String userOwner;
+    private Long ownerId;
 
 }
