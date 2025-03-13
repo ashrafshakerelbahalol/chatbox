@@ -13,7 +13,6 @@ A real-time chat application built with **Spring Boot**, **Java**, and **MySQL**
 - **Chat Rooms**: Create password-protected chat rooms or join existing ones.
 - **Real-Time Messaging**: Send and receive messages within chat rooms.
 - **Message History**: View past messages in a chat.
-- **RESTful APIs**: Documented with **Swagger/OpenAPI**.
 
 ---
 
