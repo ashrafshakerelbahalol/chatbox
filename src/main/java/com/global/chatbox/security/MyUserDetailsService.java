@@ -13,7 +13,7 @@ import com.global.chatbox.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
-public class MyUserDetialsService implements UserDetailsService {
+public class MyUserDetailsService implements UserDetailsService {
 private final UserRepository userRepository;
 
     @Override

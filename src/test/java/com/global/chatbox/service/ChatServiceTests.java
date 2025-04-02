@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.global.chatbox.mapStruct.dto.AddingChatRequest;
 import com.global.chatbox.mapStruct.dto.ChatDto;
@@ -39,18 +40,23 @@ User user;
 @BeforeEach
 public void init(){
      chat= Chat.builder().id(2L)
-        .topic("chatvv").password("1234").build();
+        .topic("chatvv").build();
      chatRequest= AddingChatRequest.builder().ownerId(1L)
        .topic("chatvv").password("1234").build();
      chatDto=ChatDto.builder()
      .chatOwner(1L)
      .id(2L).topic("chatvv").build();
+         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+    String encodedPassword = encoder.encode("1234");
+    chat.setPassword(encodedPassword);
+    chatRequest.setPassword(encodedPassword);
      user=User.builder().email("ashrafshaker@gmail.com")
        .id(1l).login("ashraf").password("hello").build(); 
 }
 @Test
 public void ChatService_createChat_chatCreated(){
     when(chatMapper.toEntity(chatRequest)).thenReturn(chat);
+    when(userService.findUserById(1L)).thenReturn(Optional.of(user));
     when(chatRepository.save(chat)).thenReturn(chat);
     when(chatMapper.toDto(chat)).thenReturn(chatDto);
     ChatDto chatDtoSaved= chatService.createChat(chatRequest);
@@ -63,7 +69,7 @@ public void ChatService_addUserToChat_userAdded(){
     when(userService.findUserById(1L)).thenReturn(Optional.of(user));
     when(chatRepository.save(chat)).thenReturn(chat);
     when(chatMapper.toDto(chat)).thenReturn(chatDto);
-    ChatDto chatDtoSaved= chatService.addUserToChat(1L,2L);
+    ChatDto chatDtoSaved= chatService.addUserToChat(1L,2L, "1234");
     Assertions.assertThat(chatDtoSaved).isNotNull();
 
 

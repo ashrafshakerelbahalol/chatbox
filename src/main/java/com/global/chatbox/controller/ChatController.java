@@ -37,9 +37,9 @@ public class ChatController {
     @PostMapping("{user-id}/add-user-to-chat/{chat-id}")
     public ResponseEntity<?> addUserToChat(
             @PathVariable("user-id") Long userId,
-             @PathVariable("chat-id") Long chatId) {
+             @PathVariable("chat-id") Long chatId,@RequestBody String password) {
         try {
-            ChatDto chatDto= chatService.addUserToChat(userId, chatId);
+            ChatDto chatDto= chatService.addUserToChat(userId, chatId, password);
             return ResponseEntity.ok(new ApiResponse("The user is added to the chat",chatDto));
         } catch(ResourceNotFoundException e){
             return ResponseEntity.status(400).body(new ApiResponse(e.getMessage(),null));
