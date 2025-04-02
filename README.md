@@ -1,5 +1,5 @@
 A real-time chat application built with **Spring Boot**, **Java**, and **MySQL**. Features user authentication, chat rooms, and message history.
-<<<<<<< HEAD
+
 =======
 
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.2.0-green.svg)
@@ -22,6 +22,7 @@ A real-time chat application built with **Spring Boot**, **Java**, and **MySQL**
 - **Java 17**
 - **Spring Boot 3.2.0**
 - **Spring Data JPA**
+- **Spring Security JPA**
 
 ### Database
 - **MySQL 8.0**
@@ -44,4 +45,3 @@ A real-time chat application built with **Spring Boot**, **Java**, and **MySQL**
 - MySQL 8.0+
 - IDE (IntelliJ, Eclipse, or VS Code)
 
->>>>>>> 5f30afaec0891f539d48495a64687609b5f7f27a
