@@ -20,6 +20,7 @@ A real-time chat application built with **Spring Boot**, **Java**, and **MySQL**
 - **Java 17**
 - **Spring Boot 3.2.0**
 - **Spring Data JPA**
+- **Spring Security + JWT**
 
 ### Database
 - **MySQL 8.0**
