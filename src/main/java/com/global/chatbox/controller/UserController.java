@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.global.chatbox.error.ResourceFoundException;
 import com.global.chatbox.error.ResourceNotFoundException;
 import com.global.chatbox.mapStruct.dto.AddingUserRequest;
+import com.global.chatbox.mapStruct.dto.LoginRequest;
 import com.global.chatbox.mapStruct.dto.UserDto;
 import com.global.chatbox.response.ApiResponse;
 import com.global.chatbox.service.UserService;
@@ -35,7 +36,20 @@ public class UserController {
 
     }
 
- 
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse> loginUser(@RequestBody LoginRequest loginRequest) {
+        try {
+            String token = userService.verify(loginRequest);
+            return ResponseEntity.ok(new ApiResponse("The Login process is done", token));
+
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(400).body(new ApiResponse(e.getMessage(), null));
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(500).body(new ApiResponse(e.getMessage(), null));
+
+        }
+
+    }
 
     @PutMapping("update-user")
     public ResponseEntity<ApiResponse> updateUser(@RequestBody UserDto userDto) {

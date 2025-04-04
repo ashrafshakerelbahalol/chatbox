@@ -3,9 +3,11 @@ package com.global.chatbox.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,7 +16,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.encrypt.BytesEncryptor;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import jakarta.servlet.Filter;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
@@ -22,6 +26,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
+    private final JwtFilter jwtFilter;
 
     @Bean
      SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -33,8 +38,9 @@ public class SecurityConfig {
         .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))); 
         httpSecurity.authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
                 .requestMatchers("user/register", "user/login").permitAll()
-                .anyRequest().authenticated());
-        httpSecurity.httpBasic(Customizer.withDefaults());
+                .anyRequest().authenticated())
+                .httpBasic(Customizer.withDefaults())
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return httpSecurity.build();
 
     }
@@ -44,6 +50,11 @@ public class SecurityConfig {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         provider.setPasswordEncoder(new BCryptPasswordEncoder(12));
         return provider;
+
+    }
+    @Bean
+    AuthenticationManager authenticationManager (AuthenticationConfiguration config) throws Exception{
+        return config.getAuthenticationManager();
 
     }
 }
