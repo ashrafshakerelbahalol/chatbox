@@ -11,6 +11,7 @@ import com.global.chatbox.mapStruct.dto.ChatDto;
 import com.global.chatbox.response.ApiResponse;
 import com.global.chatbox.service.ChatService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,28 +26,20 @@ public class ChatController {
     private final ChatService chatService;
 
     @PostMapping("create-chat")
-    public ResponseEntity<?> createChat(@RequestBody AddingChatRequest chatRequest) {
-        try {
+    public ResponseEntity<?> createChat(@RequestBody @Valid AddingChatRequest chatRequest) {
             ChatDto chatDto = chatService.createChat(chatRequest);
             return ResponseEntity.ok(new ApiResponse("The chat is created ", chatDto));
-        } catch (RuntimeException e) {
-            return ResponseEntity.status(500).body(new ApiResponse(e.getMessage(), null));
-        }
+       
     }
 
     @PostMapping("{user-id}/add-user-to-chat/{chat-id}")
     public ResponseEntity<?> addUserToChat(
             @PathVariable("user-id") Long userId,
              @PathVariable("chat-id") Long chatId,@RequestBody String password) {
-        try {
+    
             ChatDto chatDto= chatService.addUserToChat(userId, chatId, password);
             return ResponseEntity.ok(new ApiResponse("The user is added to the chat",chatDto));
-        } catch(ResourceNotFoundException e){
-            return ResponseEntity.status(400).body(new ApiResponse(e.getMessage(),null));
-
-        }catch (RuntimeException e) {
-            return ResponseEntity.status(500).body(new ApiResponse(e.getMessage(), null));
-        }
+ 
     }
 
 }

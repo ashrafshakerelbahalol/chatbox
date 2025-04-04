@@ -29,7 +29,7 @@ public class MessageService {
        Optional<User> userWithTheSameId = userService.findUserById(userId);
        if (userWithTheSameId.isEmpty())
             throw new ResourceNotFoundException("The user is not found");
-        Optional<Chat> chatWithTheSameId = chatService.findChatById(userId);
+        Optional<Chat> chatWithTheSameId = chatService.findChatById(chatId);
         if (userWithTheSameId.isEmpty())
                 throw new ResourceNotFoundException("The chat is not found");
         User currentUser = userWithTheSameId.get();
@@ -44,6 +44,9 @@ public class MessageService {
     }
 
     public List<MessageDto> getMessageById(Long chatId) {
+        Optional<Chat> chatWithTheSameId = chatService.findChatById(chatId);
+        if (chatWithTheSameId.isEmpty())
+                throw new ResourceNotFoundException("The chat is not found");
        List<Message> chatMessages =messageRepository.findByChatIdDesc(chatId);
         return    chatMessages.stream().map(message-> messageMapper.toDto(message)).toList();
         

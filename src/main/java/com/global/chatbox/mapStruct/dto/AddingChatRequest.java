@@ -10,6 +10,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,7 +24,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class AddingChatRequest {
+    @NotBlank
     private String topic;
+    @NotNull
     private String password;
     private Long ownerId;
 

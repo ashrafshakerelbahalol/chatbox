@@ -9,11 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ChatDtoToUser {
-   
-
- 
     private Long id;
-
     private String topic;
 
 }

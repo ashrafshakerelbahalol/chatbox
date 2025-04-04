@@ -42,14 +42,5 @@ public class Message {
     @JoinColumn(name = "message_user_id")
     private User user;
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", datetime=" + datetime +
-                ", text='" + text + '\'' +
-                ", chat=" + chat +
-                ", user=" + user +
-                '}';
-    }
+  
 }
