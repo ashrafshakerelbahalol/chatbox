@@ -36,7 +36,6 @@ public class User {
     private String password;
     @Column(name = "user_email", unique = true)
     private String email;
-    
     @ManyToMany(mappedBy = "users") 
     private Set<Chat> chats = new HashSet<>();
 

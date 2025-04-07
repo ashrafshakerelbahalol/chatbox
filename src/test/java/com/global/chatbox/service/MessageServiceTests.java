@@ -43,6 +43,7 @@ public class MessageServiceTests {
     Message message1;
     Message message2;
     Long userId;
+    Long chatId;
     String text;
      MessageDto messageDto;
 
@@ -50,6 +51,7 @@ public class MessageServiceTests {
     public void Init() { 
         userId=1l;
         text="hello";
+        chatId=2l;
         user=User.builder().email("ashrafshaker@gmail.com")
         .id(userId).login("ashraf").password("hello").build(); 
         chat= Chat.builder().id(2L)
@@ -63,7 +65,7 @@ public class MessageServiceTests {
     @Test
     public void MessageService_AddMessage_MessageCreated(){
          when(userService.findUserById(userId)).thenReturn(Optional.of(user));
-         when(chatService.findChatById(userId)).thenReturn(Optional.of(chat));
+         when(chatService.findChatById(chatId)).thenReturn(Optional.of(chat));
          when(messageRepository.save(Mockito.any(Message.class))).thenReturn(message1);
          when(messageMapper.toDto(message1)).thenReturn(messageDto);
          MessageDto messageDto = messageService.addMessage(userId,text,2L);
@@ -74,6 +76,7 @@ public class MessageServiceTests {
         @Test
         public void MessageService_GetMessageById_ReturnListOfMessageDesc(){
              when(messageRepository.findByChatIdDesc(2L)).thenReturn(List.of(message1,message2));
+             when(chatService.findChatById(chatId)).thenReturn(Optional.of(chat));
              when(messageMapper.toDto(any(Message.class))).thenReturn(new MessageDto());
              List<MessageDto>  chatMessages=messageService.getMessageById(2L);
              Assertions.assertThat(chatMessages).hasSize(2);

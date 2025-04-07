@@ -34,7 +34,7 @@ public class Chat {
     @Column(name="chat_topic")
     private String topic;
     @Column(name="chat_password")
-    @NotBlank(message = "The password is a must")
+   
     private String password;
     @ManyToOne
     @JoinColumn(name="chat_owner_user_id")

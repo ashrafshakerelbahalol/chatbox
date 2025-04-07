@@ -24,7 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class AddingChatRequest {
-    @NotBlank
+    @NotBlank(message = "the name  of the chat is required ")
     private String topic;
     @NotNull
     private String password;

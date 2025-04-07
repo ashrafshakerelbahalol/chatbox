@@ -35,7 +35,7 @@ public void messageRepository_findByChatIdDesc_returnListOfMessage(){
     user.setPassword("123456");
     user.setLogin("ashraf");
     user=userRepository.save(user);
-    Chat chat=Chat.builder().topic("hello").userOwner(user).build();
+    Chat chat=Chat.builder().topic("hello").password("123").userOwner(user).build();
     chat.addUser(user);
     chat=chatRepository.save(chat);
     Message message1 =Message.builder().chat(chat).text("hello").user(user).datetime(LocalDateTime.of(2016, 12, 1, 1, 25, 0, 0)).build(); 

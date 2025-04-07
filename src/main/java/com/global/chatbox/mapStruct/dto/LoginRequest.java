@@ -13,8 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LoginRequest {
-    @NotBlank
+    @NotBlank(message = "The password is a must")
     private String password;
-    @Email
+    @Email(message = "The email field should be a field")
     private String email;
 }
